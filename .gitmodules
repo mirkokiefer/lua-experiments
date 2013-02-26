@@ -1,3 +1,6 @@
 [submodule "deps/mongoose"]
 	path = deps/mongoose
 	url = git@github.com:mirkok/mongoose.git
+[submodule "deps/lua"]
+	path = deps/lua
+	url = git@github.com:mirkok/liblua.git
