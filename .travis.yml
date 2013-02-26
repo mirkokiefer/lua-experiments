@@ -1,0 +1,22 @@
+
+language: c
+
+compiler:
+  - clang
+
+before_install:
+  - git submodule update --init --recursive
+
+# Install cmake
+install:
+  - sudo apt-get update >/dev/null
+  - sudo apt-get -q install cmake valgrind
+
+# Run the Build script
+script:
+  - mkdir _build
+  - cd _build
+  - cmake .. -DCMAKE_INSTALL_PREFIX=../_install
+  - cd ../_install
+  - make && make install
+
