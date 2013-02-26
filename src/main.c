@@ -1,5 +1,11 @@
 
 #include "livelylua.h"
+#include <unistd.h>
+#include <limits.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <string.h>
+#include <libgen.h>
 
 void test_read_person_table(lua_State *L, char *var) {
   const char *type;
@@ -93,11 +99,19 @@ static void test_require_modules(lua_State *L) {
   lua_pop(L, 1);
 }
 
+
+
 int main(int argc, const char * argv[]) {
+  char *execDir = dirname((char*)argv[0]);
+  char *relScriptPath = "/livelylua_lua/test.lua";
+  char absScriptPath[strlen(execDir)+strlen(relScriptPath)];
+  strcpy(absScriptPath, execDir);
+  strcat(absScriptPath, relScriptPath);
+
   lua_State *L = luaL_newstate();
   luaL_openlibs(L);
   test_require_modules(L);
-  if (luaL_loadfile(L, "livelylua_lua/test.lua") || lua_pcall(L, 0, 0, 0))
+  if (luaL_loadfile(L, absScriptPath) || lua_pcall(L, 0, 0, 0))
     ll_error(L, "cannot run config. file: %s", lua_tostring(L, -1));
   
   test_read_double(L);
