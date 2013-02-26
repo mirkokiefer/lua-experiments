@@ -1,0 +1,3 @@
+[submodule "deps/mongoose"]
+	path = deps/mongoose
+	url = git@github.com:mirkok/mongoose.git

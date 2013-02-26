@@ -7,14 +7,13 @@ set (My_VERSION_MAJOR 1)
 set (My_VERSION_MINOR 0)
 
 add_subdirectory(deps/lua)
+add_subdirectory(deps/mongoose)
 
 set(app_SRCS src/main.c src/ll_utils.c)
 set(app_LUASRCS lua_src/test.lua)
-
-include_directories(deps/lua/src)
-
+include_directories(deps/lua/src deps/mongoose)
 add_executable(mytest ${app_SRCS})
-target_link_libraries(mytest lua)
+target_link_libraries(mytest lua mongoose)
 
  #FILE(MAKE_DIRECTORY logs) 
 install (TARGETS mytest DESTINATION bin)
