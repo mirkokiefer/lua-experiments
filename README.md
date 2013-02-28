@@ -11,11 +11,11 @@ git submodule update
 # build using cmake:
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=test ..
-make && make install
+cmake .. -DCMAKE_INSTALL_PREFIX=../_install
+cmake --build . --target install
 
 # execute script:
-test/bin/mytest
+../_install/bin/mytest
 ```
 
 ###XCode notes
