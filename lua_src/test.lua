@@ -1,5 +1,5 @@
 
-require "mylib"
+local mylib = require "mylib"
 
 test = mylib.mymult(2,3)
 bob = {type="Person", age=30}

@@ -141,12 +141,18 @@ static int test_register_modules(lua_State *L) {
   return 1;
 }
 
-static void test_require_modules(lua_State *L) {
+/*static void test_require_modules(lua_State *L) {
   luaL_requiref(L, "mylib", test_register_modules, 1);
   lua_pop(L, 1);
+}*/
+
+static void registerlib(lua_State *L, const char *name, lua_CFunction f) {
+  lua_getglobal(L, "package");
+  lua_getfield(L, -1, "preload");
+  lua_pushcfunction(L, f);
+  lua_setfield(L, -2, name);  /* package.preload[name] = f */
+  lua_pop(L, 2);  /* pop ’package’ and ’preload’ tables */
 }
-
-
 
 int main(int argc, const char * argv[]) {
   char *execDir = dirname((char*)argv[0]);
@@ -157,7 +163,9 @@ int main(int argc, const char * argv[]) {
 
   lua_State *L = luaL_newstate();
   luaL_openlibs(L);
-  test_require_modules(L);
+
+  registerlib(L, "mylib", test_register_modules);
+
   if (luaL_loadfile(L, absScriptPath) || lua_pcall(L, 0, 0, 0))
     ll_error(L, "cannot run config. file: %s", lua_tostring(L, -1));
   
