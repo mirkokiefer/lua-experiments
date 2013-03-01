@@ -9,7 +9,7 @@ before_install:
 
 # Install cmake
 install:
-  - sudo apt-get update
+  - sudo apt-get update >/dev/null
   - sudo apt-get -q install cmake valgrind
   - cmake --version
   - clang -v
