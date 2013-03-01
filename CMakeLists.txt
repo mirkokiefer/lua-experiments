@@ -17,8 +17,13 @@ add_executable(mytest ${app_SRCS})
 
 add_subdirectory(lua_src)
 
+# this is just a hotfix as only since cmake 2.8.8 you can use imported libraries from subdirectories:
+add_library(mylua STATIC IMPORTED)
+set_property(TARGET mylua PROPERTY IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/deps/luajit/lua/lib/libluajit-5.1.a)
+add_dependencies(mylua compile_lua)
+
 target_link_libraries(mytest
-  ${M_LIB} ${CMAKE_DL_LIBS} lua
+  ${M_LIB} ${CMAKE_DL_LIBS} mylua
   mongoose
   -pagezero_size10000 -image_base100000000
 )
