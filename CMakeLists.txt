@@ -16,7 +16,10 @@ set(app_LUASRCS lua_src/test.lua)
 include_directories(deps/luajit/src deps/mongoose)
 add_executable(mytest ${app_SRCS})
 
-add_dependencies(mytest libluajit)
+add_subdirectory(lua_src)
+add_dependencies(compile_lua_strings libluajit)
+
+add_dependencies(mytest libluajit compile_lua_strings)
 target_link_libraries(mytest
   ${M_LIB} ${CMAKE_DL_LIBS} ${luajit_path}
   mongoose
