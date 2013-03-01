@@ -6,14 +6,22 @@ project(mytest)
 set (My_VERSION_MAJOR 1)
 set (My_VERSION_MINOR 0)
 
-add_subdirectory(deps/lua)
+add_subdirectory(deps/luajit)
+set(luajit_path ${CMAKE_CURRENT_SOURCE_DIR}/deps/luajit/src/libluajit.a)
+
 add_subdirectory(deps/mongoose)
 
 set(app_SRCS src/main.c src/ll_utils.c)
 set(app_LUASRCS lua_src/test.lua)
-include_directories(deps/lua/src deps/mongoose)
+include_directories(deps/luajit/src deps/mongoose)
 add_executable(mytest ${app_SRCS})
-target_link_libraries(mytest lua mongoose)
+
+add_dependencies(mytest libluajit)
+target_link_libraries(mytest
+  ${M_LIB} ${CMAKE_DL_LIBS} ${luajit_path}
+  mongoose
+  -pagezero_size10000 -image_base100000000
+)
 
  #FILE(MAKE_DIRECTORY logs) 
 install (TARGETS mytest DESTINATION bin)

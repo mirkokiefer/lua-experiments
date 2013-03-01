@@ -132,14 +132,14 @@ static int test_cmult(lua_State *L) {
   return 1;
 }
 
-static int test_register_modules(lua_State *L) {
+/*static int test_register_modules(lua_State *L) {
   static const struct luaL_Reg mylib [] = {
     {"mymult", test_cmult},
-    {NULL, NULL}  /* sentinel */
+    {NULL, NULL}
   };
   luaL_newlib(L, mylib);
   return 1;
-}
+}*/
 
 /*static void test_require_modules(lua_State *L) {
   luaL_requiref(L, "mylib", test_register_modules, 1);
@@ -164,7 +164,7 @@ int main(int argc, const char * argv[]) {
   lua_State *L = luaL_newstate();
   luaL_openlibs(L);
 
-  registerlib(L, "mylib", test_register_modules);
+  /*registerlib(L, "mylib", test_register_modules);
 
   if (luaL_loadfile(L, absScriptPath) || lua_pcall(L, 0, 0, 0))
     ll_error(L, "cannot run config. file: %s", lua_tostring(L, -1));
@@ -187,7 +187,7 @@ int main(int argc, const char * argv[]) {
   double z1 = test_call_func(L, "mymult", 3, 4);
   printf("c mult 3*4=%f\n", z1);
 
-  ll_stackdump(L);
+  ll_stackdump(L);*/
   lua_close(L);
 
   test_mongoose();

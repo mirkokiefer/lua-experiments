@@ -1,6 +1,6 @@
 [submodule "deps/mongoose"]
 	path = deps/mongoose
 	url = git://github.com/mirkok/mongoose.git
-[submodule "deps/lua"]
-	path = deps/lua
+[submodule "deps/luajit"]
+	path = deps/luajit
 	url = git://github.com/mirkok/luajit.git
