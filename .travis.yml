@@ -11,6 +11,8 @@ before_install:
 install:
   - sudo apt-get update >/dev/null
   - sudo apt-get -q install cmake valgrind
+  - cmake --version
+  - clang -v
 
 # Run the Build script
 script:
