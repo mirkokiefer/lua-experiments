@@ -7,7 +7,7 @@
 #include <string.h>
 #include <libgen.h>
 
-#include "../deps/mongoose/mongoose.h"
+#include "mongoose.h"
 
 static int begin_request_handler(struct mg_connection *conn) {
   const struct mg_request_info *request_info = mg_get_request_info(conn);
