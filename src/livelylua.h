@@ -5,8 +5,8 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "../deps/lua/src/lua.h"
-#include "../deps/lua/src/lauxlib.h"
-#include "../deps/lua/src/lualib.h"
+#include "lua.h"
+#include "lauxlib.h"
+#include "lualib.h"
 
 #include "ll_utils.h"
