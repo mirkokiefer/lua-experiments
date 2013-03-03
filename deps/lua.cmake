@@ -2,7 +2,7 @@
 ExternalProject_Add(project_lua
   URL https://github.com/mirkok/liblua/archive/lua-5.2.1.tar.gz
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/lua
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/lua
 )
 
 ExternalProject_Get_Property(project_lua install_dir)

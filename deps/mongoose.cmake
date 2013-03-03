@@ -2,7 +2,7 @@
 ExternalProject_Add(project_mongoose
   URL https://github.com/mirkok/mongoose/archive/3.7-cmake.tar.gz
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/mongoose
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/mongoose
 )
 
 ExternalProject_Get_Property(project_mongoose install_dir)
