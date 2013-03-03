@@ -9,6 +9,6 @@ ExternalProject_Get_Property(project_mongoose install_dir)
 
 include_directories(${install_dir}/include)
 
-add_library(mongoose STATIC IMPORTED GLOBAL)
+add_library(mongoose STATIC IMPORTED)
 set_property(TARGET mongoose PROPERTY IMPORTED_LOCATION ${install_dir}/lib/libmongoose.a)
 add_dependencies(mongoose project_mongoose)
