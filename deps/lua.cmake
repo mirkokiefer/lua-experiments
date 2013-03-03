@@ -6,10 +6,9 @@ ExternalProject_Add(project_lua
 )
 
 ExternalProject_Get_Property(project_lua install_dir)
-set (lua_dir ${install_dir})
 
-include_directories(${lua_dir}/include)
+include_directories(${install_dir}/include)
 
 add_library(lua STATIC IMPORTED GLOBAL)
-set_property(TARGET lua PROPERTY IMPORTED_LOCATION ${lua_dir}/lib/liblua.a)
+set_property(TARGET lua PROPERTY IMPORTED_LOCATION ${install_dir}/lib/liblua.a)
 add_dependencies(lua project_lua)
