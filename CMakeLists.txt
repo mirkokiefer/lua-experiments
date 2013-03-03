@@ -32,9 +32,8 @@ include_directories(${lua_dir}/include ${mongoose_dir}/include)
 add_executable(mytest ${app_SRCS})
 add_dependencies(mytest project_lua project_mongoose)
 find_package (Threads)
-find_library(M_LIB m)
 target_link_libraries(mytest
-  ${CMAKE_THREAD_LIBS_INIT} ${M_LIB} ${CMAKE_DL_LIBS}
+  ${CMAKE_THREAD_LIBS_INIT} m ${CMAKE_DL_LIBS}
   ${mongoose_dir}/lib/libmongoose.a ${lua_dir}/lib/liblua.a
 )
 
