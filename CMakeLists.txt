@@ -7,11 +7,7 @@ project(mytest)
 set (My_VERSION_MAJOR 1)
 set (My_VERSION_MINOR 0)
 
-ExternalProject_Add(project_lua
-  URL https://github.com/mirkok/liblua/archive/lua-5.2.1.tar.gz
-  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/lua
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-)
+include(deps/lua.cmake)
 
 ExternalProject_Add(project_mongoose
   URL https://github.com/mirkok/mongoose/archive/3.7-cmake.tar.gz
@@ -19,21 +15,19 @@ ExternalProject_Add(project_mongoose
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 )
 
-ExternalProject_Get_Property(project_lua install_dir)
-set (lua_dir ${install_dir})
 ExternalProject_Get_Property(project_mongoose install_dir)
 set (mongoose_dir ${install_dir})
 
 
 set(app_SRCS src/main.c src/ll_utils.c)
-set(app_LUASRCS project_lua/test.lua)
+set(app_LUASRCS lua_src/test.lua)
 
-include_directories(${lua_dir}/include ${mongoose_dir}/include)
+include_directories(${mongoose_dir}/include)
 add_executable(mytest ${app_SRCS})
-add_dependencies(mytest project_lua project_mongoose)
+add_dependencies(mytest project_mongoose)
 find_package (Threads)
 target_link_libraries(mytest
-  ${mongoose_dir}/lib/libmongoose.a ${lua_dir}/lib/liblua.a
+  ${mongoose_dir}/lib/libmongoose.a lua
   ${CMAKE_THREAD_LIBS_INIT} m ${CMAKE_DL_LIBS}
 )
 
