@@ -33,8 +33,8 @@ add_executable(mytest ${app_SRCS})
 add_dependencies(mytest project_lua project_mongoose)
 find_package (Threads)
 target_link_libraries(mytest
-  ${CMAKE_THREAD_LIBS_INIT} m ${CMAKE_DL_LIBS}
   ${mongoose_dir}/lib/libmongoose.a ${lua_dir}/lib/liblua.a
+  ${CMAKE_THREAD_LIBS_INIT} m ${CMAKE_DL_LIBS}
 )
 
  #FILE(MAKE_DIRECTORY logs) 
