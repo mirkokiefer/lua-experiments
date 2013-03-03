@@ -31,7 +31,11 @@ set(app_LUASRCS project_lua/test.lua)
 include_directories(${lua_dir}/include ${mongoose_dir}/include)
 add_executable(mytest ${app_SRCS})
 add_dependencies(mytest project_lua project_mongoose)
-target_link_libraries(mytest ${mongoose_dir}/lib/libmongoose.a ${lua_dir}/lib/liblua.a)
+find_package (Threads)
+target_link_libraries(mytest
+  ${CMAKE_THREAD_LIBS_INIT} ${M_LIB} ${CMAKE_DL_LIBS}
+  ${mongoose_dir}/lib/libmongoose.a ${lua_dir}/lib/liblua.a
+)
 
  #FILE(MAKE_DIRECTORY logs) 
 install (TARGETS mytest DESTINATION bin)
