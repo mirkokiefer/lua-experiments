@@ -10,7 +10,7 @@ ExternalProject_Add(project_luajit
 
 ExternalProject_Get_Property(project_luajit install_dir)
 
-include_directories(${install_dir}/include)
+include_directories(${install_dir}/include/luajit-2.0)
 
 add_library(lua STATIC IMPORTED)
 set_property(TARGET lua PROPERTY IMPORTED_LOCATION ${install_dir}/lib/libluajit-5.1.a)
