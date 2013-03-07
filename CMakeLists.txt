@@ -7,18 +7,24 @@ project(mytest)
 set (My_VERSION_MAJOR 1)
 set (My_VERSION_MINOR 0)
 
-include(deps/lua.cmake)
+include(deps/luajit.cmake)
 include(deps/mongoose.cmake)
 
-set(app_SRCS src/main.c src/ll_utils.c)
+set(app_SRCS src/simplemain.c)
 set(app_LUASRCS lua_src/test.lua)
 
 add_executable(mytest ${app_SRCS})
 
 find_package (Threads)
+
+if ("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
+    set(build_opts -pagezero_size10000 -image_base100000000)
+endif()
+
 target_link_libraries(mytest
   mongoose lua
   ${CMAKE_THREAD_LIBS_INIT} m ${CMAKE_DL_LIBS}
+  ${build_opts}
 )
 
  #FILE(MAKE_DIRECTORY logs) 
