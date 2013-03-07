@@ -4,12 +4,12 @@ include(ExternalProject)
 
 project(mytest)
 
-option(LUAJIT "use luajit" OFF)
+set (use_luajit $ENV{USE_LUAJIT})
 
 set (My_VERSION_MAJOR 1)
 set (My_VERSION_MINOR 0)
 
-if (${LUAJIT})
+if ("${use_luajit}" STREQUAL "TRUE")
   include(deps/luajit.cmake)
 else()
   include(deps/lua.cmake)
