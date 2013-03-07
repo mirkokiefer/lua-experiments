@@ -4,10 +4,17 @@ include(ExternalProject)
 
 project(mytest)
 
+option(LUAJIT "use luajit" OFF)
+
 set (My_VERSION_MAJOR 1)
 set (My_VERSION_MINOR 0)
 
-include(deps/luajit.cmake)
+if (${LUAJIT})
+  include(deps/luajit.cmake)
+else()
+  include(deps/lua.cmake)
+endif()
+
 include(deps/mongoose.cmake)
 
 set(app_SRCS src/simplemain.c)
