@@ -5,6 +5,10 @@ compiler:
   - gcc
   - clang
 
+env:
+  - USE_LUAJIT=FALSE
+  - USE_LUAJIT=TRUE
+
 before_install:
   - git submodule update --init --recursive
 
