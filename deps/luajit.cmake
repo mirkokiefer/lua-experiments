@@ -1,10 +1,10 @@
 
 ExternalProject_Add(project_lua
   URL http://luajit.org/download/LuaJIT-2.0.1.tar.gz
-  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/lua
+  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luajit
   CONFIGURE_COMMAND ""
   BUILD_COMMAND make
-  INSTALL_COMMAND make install PREFIX=${CMAKE_CURRENT_BINARY_DIR}/lua
+  INSTALL_COMMAND make install PREFIX=${CMAKE_CURRENT_BINARY_DIR}/luajit
   BUILD_IN_SOURCE 1
 )
 
