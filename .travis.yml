@@ -24,3 +24,7 @@ script:
   - cmake .. -DCMAKE_INSTALL_PREFIX=../_install
   - cmake --build . --target install
 
+matrix:
+  exclude:
+    - compiler: gcc
+      env: USE_LUAJIT=TRUE
